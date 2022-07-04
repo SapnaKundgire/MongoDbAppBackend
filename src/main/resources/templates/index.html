@@ -1,0 +1,55 @@
+ <!DOCTYPE html>
+<html 
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>server Manager</title>
+
+</head>
+<body>
+
+<div align="center" >
+    <h1 style=color:red>Servers Details</h1>
+    <a href="/new">Save  New Server</a>
+    <br/><br/>
+    <form th:action="@{/search}" method="get">    
+<input type="text" name="id" th:value=${id} size=50></input>   
+       
+<button type="submit" class="btn btn info" >SearchByID</button> 
+</form>    
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Server ID</th>
+                <th>Name</th>
+                <th>Language</th>
+                <th>Framework</th>
+                <th> Remove Record</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="ServerModel : ${listServers}">
+                <td th:text="${ServerModel.id}">Server ID</td>
+                <td th:text="${ServerModel.name}">Name</td>
+                <td th:text="${ServerModel.language}">Language</td>
+                <td th:text="${ServerModel.framework}">Framework</td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;
+                            <a th:href="@{/delete/{id}(id=${ServerModel.id})}" ><i class="fa fa-remove"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+      <form th:action="@{/searchByname}" method="get">    
+      <input type="text" name="name" th:value=${name} size=50></input>   
+      <button type="submit" class="btn btn info"  style="color:blue">SearchByname </button> 
+     </form> 
+</div>  
+</body>
+</html>
