@@ -1,4 +1,8 @@
-on: push
+on:
+  workflow_run:
+    workflows: [Java CI with Maven ]
+    types:
+      - completed
 name: cd deploy
 jobs:
   deploy:
